@@ -18,10 +18,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
         const variants = {
             primary: cn(
-                'bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600',
-                'text-white shadow-lg shadow-primary-500/25',
-                'hover:shadow-xl hover:shadow-accent-500/30 hover:scale-[1.02]',
-                'focus-visible:ring-primary-500'
+                'bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink',
+                'bg-[length:200%_auto] transition-[background-position] duration-500 hover:bg-[position:100%_center]',
+                'text-white shadow-lg shadow-neon-cyan/25',
+                'hover:shadow-xl hover:shadow-neon-purple/30 hover:scale-[1.02]',
+                'focus-visible:ring-neon-cyan'
             ),
             secondary: cn(
                 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100',
