@@ -103,13 +103,12 @@ export function WordReveal({
             x: 0,
             y: 0,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 damping: 12,
                 stiffness: 100,
             },
         },
         hidden: {
-            opacity: 1, // Start visible but hidden by filter or offscreen? 
             // Actually let's do a "pop in" effect
             opacity: 0,
             x: -20,
