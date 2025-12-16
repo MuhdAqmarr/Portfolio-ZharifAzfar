@@ -149,7 +149,7 @@ export function Resume() {
                     </ScrollReveal>
 
                     <StaggerContainer className="space-y-6">
-                        {resumeData.workingExperiences.map((exp, index) => (
+                        {[...resumeData.personalStatement, ...resumeData.workingExperiences].map((exp, index) => (
                             <StaggerItem key={index}>
                                 <Card variant="hud" glow className="p-6">
                                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
@@ -184,50 +184,7 @@ export function Resume() {
                     </StaggerContainer>
                 </section>
 
-                {/* Personal Statement Section */}
-                <section>
-                    <ScrollReveal>
-                        <h2 className="font-display text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-                            <span className="h-1 w-8 rounded-full bg-gradient-to-r from-neon-pink to-neon-purple" />
-                            Personal Statement
-                        </h2>
-                    </ScrollReveal>
 
-                    <StaggerContainer className="space-y-6">
-                        {resumeData.personalStatement.map((exp, index) => (
-                            <StaggerItem key={index}>
-                                <Card variant="hud" glow className="p-6">
-                                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-                                        <div>
-                                            <h3 className="font-display font-semibold text-lg text-gray-900 dark:text-white">
-                                                {exp.role}
-                                            </h3>
-                                            <p className="text-primary-600 dark:text-neon-cyan font-medium">
-                                                {exp.company}, {exp.location}
-                                            </p>
-                                        </div>
-                                        <div className="flex flex-col items-start lg:items-end gap-1">
-                                            <span className="text-sm font-mono text-gray-600 dark:text-gray-400">
-                                                {exp.period}
-                                            </span>
-                                            <span className="text-xs px-2 py-0.5 rounded-full bg-neon-purple/10 text-neon-purple">
-                                                {exp.duration}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <ul className="space-y-2">
-                                        {exp.responsibilities.map((resp, i) => (
-                                            <li key={i} className="text-gray-600 dark:text-gray-400 flex items-start gap-2">
-                                                <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-neon-purple" />
-                                                <span>{resp}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </Card>
-                            </StaggerItem>
-                        ))}
-                    </StaggerContainer>
-                </section>
 
                 {/* Activities Section */}
                 <section>
