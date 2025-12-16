@@ -36,7 +36,7 @@ function RootLayout() {
             <Navbar />
 
             {/* Main content */}
-            <main id="main-content" className="flex-1">
+            <main id="main-content" className="flex-1 relative z-10">
                 <AnimatePresence mode="wait">
                     <Suspense fallback={<LoadingScreen />}>
                         <Outlet />

@@ -1,6 +1,7 @@
 import { useRef, ReactNode } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 interface AnimationProps {
     children: ReactNode;
@@ -10,6 +11,7 @@ interface AnimationProps {
 
 export function PopIn({ children, className, delay = 0 }: AnimationProps) {
     const reducedMotion = useReducedMotion();
+    const isMobile = useIsMobile();
 
     return (
         <motion.div
@@ -18,10 +20,11 @@ export function PopIn({ children, className, delay = 0 }: AnimationProps) {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{
-                type: "spring",
+                type: isMobile ? "tween" : "spring",
                 stiffness: 300,
                 damping: 15,
-                delay: delay
+                delay: delay,
+                duration: isMobile ? 0.3 : undefined
             }}
         >
             {children}
@@ -31,6 +34,7 @@ export function PopIn({ children, className, delay = 0 }: AnimationProps) {
 
 export function SlideIn({ children, className, delay = 0, direction = "left" }: AnimationProps & { direction?: "left" | "right" | "up" | "down" }) {
     const reducedMotion = useReducedMotion();
+    const isMobile = useIsMobile();
 
     const offsets = {
         left: { x: -50, y: 0 },
@@ -46,10 +50,11 @@ export function SlideIn({ children, className, delay = 0, direction = "left" }: 
             whileInView={{ x: 0, y: 0, opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{
-                type: "spring",
+                type: isMobile ? "tween" : "spring",
                 stiffness: 200,
                 damping: 20,
-                delay: delay
+                delay: delay,
+                duration: isMobile ? 0.4 : undefined
             }}
         >
             {children}
@@ -58,17 +63,28 @@ export function SlideIn({ children, className, delay = 0, direction = "left" }: 
 }
 
 export function Hover3D({ children, className }: AnimationProps) {
+    const isMobile = useIsMobile();
+
     return (
         <motion.div
             className={className}
-            whileHover={{
-                scale: 1.05,
-                rotateX: 5,
-                rotateY: 5,
-                zIndex: 10
+            whileHover={
+                isMobile
+                    ? { scale: 1.02 } // Simplified for mobile
+                    : {
+                        scale: 1.05,
+                        rotateX: 5,
+                        rotateY: 5,
+                        zIndex: 10
+                    }
+            }
+            transition={{
+                type: isMobile ? "tween" : "spring",
+                stiffness: 400,
+                damping: 10,
+                duration: isMobile ? 0.2 : undefined
             }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            style={{ perspective: 1000 }}
+            style={isMobile ? {} : { perspective: 1000 }}
         >
             {children}
         </motion.div>

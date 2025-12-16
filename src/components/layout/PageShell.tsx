@@ -17,7 +17,7 @@ export function PageShell({ children, title, subtitle, className }: PageShellPro
 
     return (
         <motion.div
-            className={cn('min-h-screen pt-24 pb-16', className)}
+            className={cn('min-h-screen pt-28 pb-16 relative z-10', className)}
             initial="initial"
             animate="enter"
             exit="exit"
@@ -26,7 +26,7 @@ export function PageShell({ children, title, subtitle, className }: PageShellPro
             {/* Page header */}
             <div className="mx-auto max-w-6xl px-4 mb-12">
                 <motion.div
-                    className="relative"
+                    className="relative pt-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: reducedMotion ? 0.1 : 0.5 }}

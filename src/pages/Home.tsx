@@ -30,7 +30,7 @@ export function Home() {
 
 
             {/* Hero Section */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden ">
                 {/* Hero Content */}
                 <div className="relative z-10 mx-auto max-w-6xl px-4 text-center">
                     <motion.div
@@ -233,6 +233,79 @@ export function Home() {
                             </Button>
                         </Link>
                     </div>
+                </div>
+            </section>
+
+            {/* Experience Section */}
+            <section className="py-20">
+                <div className="mx-auto max-w-6xl px-4">
+                    <ScrollReveal>
+                        <div className="flex md:flex-row flex-col items-center justify-between mb-12 gap-4 relative z-10">
+                            <div className="text-center md:text-left">
+                                <h2 className="font-display text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                                    Professional <span className="gradient-text">Experience</span>
+                                </h2>
+                                <p className="text-gray-600 dark:text-gray-400 mt-2">
+                                    My recent roles and industry exposure.
+                                </p>
+                            </div>
+                            <Link to="/experience">
+                                <Button variant="outline" size="sm" className="hidden md:flex group">
+                                    View Full Timeline
+                                    <svg className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </Button>
+                            </Link>
+                        </div>
+
+                        <div className="grid gap-6 md:grid-cols-2">
+                            {[...resumeData.personalStatement, ...resumeData.workingExperiences].map((job, index) => (
+                                <Link to="/experience" key={index} className="block h-full">
+                                    <Hover3D className="h-full">
+                                        <div className={cn(
+                                            "hud-panel p-6 h-full flex flex-col items-start text-left border-none",
+                                            "bg-white/50 dark:bg-gray-900/40 hover:bg-white/80 dark:hover:bg-gray-800/60 transition-colors backdrop-blur-sm",
+                                            "shadow-lg hover:shadow-xl hover:shadow-cyan-500/5"
+                                        )}>
+                                            <div className="w-full flex justify-between items-start mb-4">
+                                                <div>
+                                                    <h3 className="font-display text-xl font-bold text-gray-900 dark:text-white group-hover:text-neon-cyan transition-colors">
+                                                        {job.role}
+                                                    </h3>
+                                                    <p className="text-cyan-600 dark:text-cyan-400 font-medium">
+                                                        {job.company}
+                                                    </p>
+                                                </div>
+                                                <span className="inline-block px-2 py-1 rounded text-[10px] font-mono bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                                    {job.period}
+                                                </span>
+                                            </div>
+
+                                            <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4 flex-1">
+                                                {job.responsibilities[0]}
+                                            </p>
+
+                                            <div className="text-xs font-medium text-cyan-600 dark:text-neon-cyan/80 flex items-center gap-1 group-hover:gap-2 transition-all">
+                                                Read more
+                                                <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </Hover3D>
+                                </Link>
+                            ))}
+                        </div>
+
+                        <div className="mt-8 text-center md:hidden">
+                            <Link to="/experience">
+                                <Button variant="outline" size="sm">
+                                    View Full Timeline
+                                </Button>
+                            </Link>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
