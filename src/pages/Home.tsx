@@ -9,7 +9,7 @@ import { getPageVariants } from '../lib/motion'
 import { TypewriterEffect } from '../components/ui/TypewriterEffect'
 import { PopIn, SlideIn, Hover3D } from '../components/ui/FunScrollAnimations'
 import { ScrollingSkills } from '../components/ui/ScrollingSkills'
-import { GameTechBackground } from '../components/ui/GameTechBackground'
+
 
 export function Home() {
     const reducedMotion = useReducedMotion()
@@ -27,8 +27,7 @@ export function Home() {
             exit="exit"
             variants={pageVariants}
         >
-            {/* Global Background */}
-            {!reducedMotion && <GameTechBackground />}
+
 
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">

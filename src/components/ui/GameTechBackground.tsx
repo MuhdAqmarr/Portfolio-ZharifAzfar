@@ -39,7 +39,7 @@ export function GameTechBackground() {
     return (
         <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 select-none">
             {/* Base Background - Opaque to cover global background */}
-            <div className="absolute inset-0 bg-gray-50 dark:bg-gray-950 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-cyan-50/20 to-purple-50/20 dark:from-gray-950 dark:to-gray-950 transition-colors duration-500" />
 
             {/* Mouse Spotlight / Glow */}
             <motion.div

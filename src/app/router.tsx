@@ -7,6 +7,8 @@ import { ScrollProgress } from '../components/ui/ScrollProgress'
 import { LoadingScreen } from '../components/ui/LoadingScreen'
 import { ScrollToTop } from '../components/layout/ScrollToTop'
 
+import { GameTechBackground } from '../components/ui/GameTechBackground'
+
 // Lazy load pages for code splitting
 const Home = lazy(() => import('../pages/Home').then((m) => ({ default: m.Home })))
 const Resume = lazy(() => import('../pages/Resume').then((m) => ({ default: m.Resume })))
@@ -21,14 +23,9 @@ function RootLayout() {
     return (
         <div className="relative min-h-screen flex flex-col">
             <ScrollToTop />
-            {/* Animated gradient background */}
-            <div className="gradient-bg-animated" />
 
-            {/* Grid overlay */}
-            <div className="grid-overlay" />
-
-            {/* Scanline overlay (very subtle) */}
-            <div className="scanline-overlay" />
+            {/* Global Animated Background */}
+            <GameTechBackground />
 
 
 
