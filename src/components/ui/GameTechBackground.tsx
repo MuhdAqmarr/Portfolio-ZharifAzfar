@@ -17,9 +17,9 @@ export function GameTechBackground() {
     if (reducedMotion) return <div className="absolute inset-0 bg-gray-50 dark:bg-gray-950 -z-20" />;
 
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 select-none">
-            {/* Base Background */}
-            <div className="absolute inset-0 bg-gray-50/50 dark:bg-gray-950/80 transition-colors duration-500" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+            {/* Base Background - Opaque to cover global background */}
+            <div className="absolute inset-0 bg-gray-50 dark:bg-gray-950 transition-colors duration-500" />
 
             {/* Cyber Grid - Top Plane (Ceiling) */}
             <motion.div
