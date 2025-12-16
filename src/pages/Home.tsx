@@ -9,6 +9,7 @@ import { getPageVariants } from '../lib/motion'
 import { TypewriterEffect } from '../components/ui/TypewriterEffect'
 import { PopIn, SlideIn, Hover3D } from '../components/ui/FunScrollAnimations'
 import { ScrollingSkills } from '../components/ui/ScrollingSkills'
+import { GameTechBackground } from '../components/ui/GameTechBackground'
 
 export function Home() {
     const reducedMotion = useReducedMotion()
@@ -30,51 +31,7 @@ export function Home() {
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
                 {/* Floating decorative shapes */}
                 {!reducedMotion && (
-                    <>
-                        <motion.div
-                            className="absolute top-1/4 left-10 h-32 w-32 rounded-full bg-gradient-to-br from-neon-cyan/30 to-transparent blur-md will-change-transform"
-                            style={{ translateZ: 0 }} // Force GPU
-                            animate={{
-                                y: [-20, 20, -20],
-                                x: [-10, 10, -10],
-                                rotate: [0, 10, -10, 0],
-                            }}
-                            transition={{
-                                duration: 8,
-                                repeat: Infinity,
-                                ease: "linear" // Smoother than easeInOut for continuous ambient motion
-                            }}
-                        />
-                        <motion.div
-                            className="absolute bottom-1/4 right-10 h-48 w-48 rounded-full bg-gradient-to-br from-neon-purple/30 to-transparent blur-xl will-change-transform"
-                            style={{ translateZ: 0 }}
-                            animate={{
-                                y: [20, -20, 20],
-                                x: [10, -10, 10],
-                                rotate: [0, -10, 10, 0],
-                            }}
-                            transition={{
-                                duration: 10,
-                                repeat: Infinity,
-                                ease: "linear",
-                                delay: 1
-                            }}
-                        />
-                        <motion.div
-                            className="absolute top-1/2 right-1/4 h-24 w-24 rounded-full bg-gradient-to-br from-neon-pink/20 to-transparent blur-md will-change-transform"
-                            style={{ translateZ: 0 }}
-                            animate={{
-                                y: [-15, 15, -15],
-                                scale: [1, 1.1, 1],
-                            }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "linear",
-                                delay: 2
-                            }}
-                        />
-                    </>
+                    <GameTechBackground />
                 )}
 
                 {/* Hero Content */}
