@@ -147,6 +147,7 @@ const cardContainer: React.CSSProperties = {
     position: "relative",
     paddingTop: 20,
     marginBottom: -120,
+    willChange: "transform", // Hint browser optimization
 }
 
 const splash: React.CSSProperties = {
@@ -168,6 +169,7 @@ const card: React.CSSProperties = {
     borderRadius: 20,
     // background will be handled by classNames for dark mode support
     boxShadow:
-        "0 0 1px hsl(0deg 0% 0% / 0.075), 0 0 2px hsl(0deg 0% 0% / 0.075), 0 0 4px hsl(0deg 0% 0% / 0.075), 0 0 8px hsl(0deg 0% 0% / 0.075), 0 0 16px hsl(0deg 0% 0% / 0.075)",
+        "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 20px rgba(0, 0, 0, 0.05)", // Simplified shadow
     transformOrigin: "10% 60%",
+    willChange: "transform",
 }

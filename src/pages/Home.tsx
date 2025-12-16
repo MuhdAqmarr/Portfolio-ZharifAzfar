@@ -12,6 +12,7 @@ import { ScrollingSkills } from '../components/ui/ScrollingSkills'
 
 export function Home() {
     const reducedMotion = useReducedMotion()
+    // Explicitly memoize variants to avoid re-calculation on every render
     const pageVariants = getPageVariants(reducedMotion)
 
     const { scrollY } = useScroll()
@@ -31,7 +32,8 @@ export function Home() {
                 {!reducedMotion && (
                     <>
                         <motion.div
-                            className="absolute top-1/4 left-10 h-32 w-32 rounded-full bg-gradient-to-br from-neon-cyan/40 to-transparent blur-xl"
+                            className="absolute top-1/4 left-10 h-32 w-32 rounded-full bg-gradient-to-br from-neon-cyan/30 to-transparent blur-md will-change-transform"
+                            style={{ translateZ: 0 }} // Force GPU
                             animate={{
                                 y: [-20, 20, -20],
                                 x: [-10, 10, -10],
@@ -40,11 +42,12 @@ export function Home() {
                             transition={{
                                 duration: 8,
                                 repeat: Infinity,
-                                ease: "easeInOut"
+                                ease: "linear" // Smoother than easeInOut for continuous ambient motion
                             }}
                         />
                         <motion.div
-                            className="absolute bottom-1/4 right-10 h-48 w-48 rounded-full bg-gradient-to-br from-neon-purple/40 to-transparent blur-2xl"
+                            className="absolute bottom-1/4 right-10 h-48 w-48 rounded-full bg-gradient-to-br from-neon-purple/30 to-transparent blur-xl will-change-transform"
+                            style={{ translateZ: 0 }}
                             animate={{
                                 y: [20, -20, 20],
                                 x: [10, -10, 10],
@@ -53,20 +56,21 @@ export function Home() {
                             transition={{
                                 duration: 10,
                                 repeat: Infinity,
-                                ease: "easeInOut",
+                                ease: "linear",
                                 delay: 1
                             }}
                         />
                         <motion.div
-                            className="absolute top-1/2 right-1/4 h-24 w-24 rounded-full bg-gradient-to-br from-neon-pink/30 to-transparent blur-xl"
+                            className="absolute top-1/2 right-1/4 h-24 w-24 rounded-full bg-gradient-to-br from-neon-pink/20 to-transparent blur-md will-change-transform"
+                            style={{ translateZ: 0 }}
                             animate={{
                                 y: [-15, 15, -15],
-                                scale: [1, 1.2, 1],
+                                scale: [1, 1.1, 1],
                             }}
                             transition={{
                                 duration: 6,
                                 repeat: Infinity,
-                                ease: "easeInOut",
+                                ease: "linear",
                                 delay: 2
                             }}
                         />
@@ -95,13 +99,13 @@ export function Home() {
                                 hidden: { opacity: 0, y: 20 },
                                 visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 20 } }
                             }}
-                            className="mb-8 inline-flex items-center gap-2 rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-4 py-2 hover:bg-neon-cyan/20 transition-colors cursor-default"
+                            className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-200 dark:border-neon-cyan/40 bg-cyan-50 dark:bg-neon-cyan/10 px-4 py-2 hover:bg-cyan-100 dark:hover:bg-neon-cyan/20 transition-colors cursor-default"
                         >
                             <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon-cyan opacity-75" />
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-neon-cyan" />
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-600 dark:bg-neon-cyan opacity-75" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-600 dark:bg-neon-cyan" />
                             </span>
-                            <span className="text-sm font-medium text-neon-cyan">Open to Opportunities</span>
+                            <span className="text-sm font-medium text-cyan-700 dark:text-neon-cyan">Open to Opportunities</span>
                         </motion.div>
 
                         {/* Name */}
