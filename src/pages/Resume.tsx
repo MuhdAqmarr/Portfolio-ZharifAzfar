@@ -13,22 +13,23 @@ export function Resume() {
         >
             {/* Download Resume Button */}
             <div className="flex justify-end -mt-8 mb-8">
-                <Button
-                    variant="primary"
-                    size="md"
-                    onClick={() => {
-                        // Create a link to download the resume PDF
-                        const link = document.createElement('a');
-                        link.href = '/resume.pdf'; // You'll need to add your resume PDF to the public folder
-                        link.download = 'Zharif_Azfar_Resume.pdf';
-                        link.click();
-                    }}
+                <a
+                    href="/resume.pdf"
+                    download="Zharif_Azfar_Resume.pdf"
+                    title="Download Resume"
+                    className="inline-block"
                 >
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Download Resume
-                </Button>
+                    <Button
+                        variant="primary"
+                        size="md"
+                        className="pointer-events-none" // Disable button interaction so the anchor tag handles the click
+                    >
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Download Resume
+                    </Button>
+                </a>
             </div>
 
             <div className="space-y-12">
