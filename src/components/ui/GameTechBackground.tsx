@@ -6,6 +6,26 @@ export function GameTechBackground() {
     const reducedMotion = useReducedMotion();
     const { scrollY } = useScroll();
 
+    // Mouse tracking
+    const mouseX = useRef(0);
+    const mouseY = useRef(0);
+    const mouseXSpring = useSpring(0, { stiffness: 100, damping: 20 });
+    const mouseYSpring = useSpring(0, { stiffness: 100, damping: 20 });
+
+    useEffect(() => {
+        if (reducedMotion) return;
+
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseX.current = e.clientX;
+            mouseY.current = e.clientY;
+            mouseXSpring.set(e.clientX);
+            mouseYSpring.set(e.clientY);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [reducedMotion, mouseXSpring, mouseYSpring]);
+
     // Parallax effects for shapes
     const y1 = useTransform(scrollY, [0, 1000], [0, 300]);
     const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
@@ -14,12 +34,23 @@ export function GameTechBackground() {
     // Grid movement
     const gridY = useTransform(scrollY, [0, 1000], [0, 50]);
 
-    if (reducedMotion) return <div className="absolute inset-0 bg-gray-50 dark:bg-gray-950 -z-20" />;
+    if (reducedMotion) return <div className="fixed inset-0 bg-gray-50 dark:bg-gray-950 -z-50" />;
 
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 select-none">
             {/* Base Background - Opaque to cover global background */}
             <div className="absolute inset-0 bg-gray-50 dark:bg-gray-950 transition-colors duration-500" />
+
+            {/* Mouse Spotlight / Glow */}
+            <motion.div
+                className="absolute inset-0 z-10 opacity-30 dark:opacity-40"
+                style={{
+                    background: useTransform(
+                        [mouseXSpring, mouseYSpring],
+                        ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(14, 165, 233, 0.15), transparent 40%)`
+                    )
+                }}
+            />
 
             {/* Cyber Grid - Top Plane (Ceiling) */}
             <motion.div

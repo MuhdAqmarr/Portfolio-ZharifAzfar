@@ -27,13 +27,11 @@ export function Home() {
             exit="exit"
             variants={pageVariants}
         >
+            {/* Global Background */}
+            {!reducedMotion && <GameTechBackground />}
+
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-                {/* Floating decorative shapes */}
-                {!reducedMotion && (
-                    <GameTechBackground />
-                )}
-
                 {/* Hero Content */}
                 <div className="relative z-10 mx-auto max-w-6xl px-4 text-center">
                     <motion.div
