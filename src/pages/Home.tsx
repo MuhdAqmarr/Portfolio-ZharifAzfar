@@ -150,8 +150,8 @@ export function Home() {
                                 <PopIn key={stat.label} delay={index * 0.1}>
                                     <Hover3D
                                         className={cn(
-                                            'hud-panel p-6 text-center',
-                                            'hover:border-neon-cyan/40 transition-colors bg-white/80 dark:bg-gray-900/40 backdrop-blur-md' // Enhanced bg
+                                            'hud-panel p-6 text-center shadow-lg hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300',
+                                            'hover:border-neon-cyan/40 bg-gradient-to-br from-white/90 via-cyan-50/30 to-purple-50/30 dark:from-gray-900/80 dark:via-gray-900/80 dark:to-cyan-900/20 backdrop-blur-md' // Enhanced bg
                                         )}
                                     >
                                         <div className="font-mono text-xs text-cyan-600 dark:text-neon-cyan mb-2">{stat.label}</div>
@@ -173,17 +173,21 @@ export function Home() {
             <section className="py-12 bg-gray-50/50 dark:bg-gray-900/30">
                 <div className="mx-auto max-w-4xl px-4">
                     <ScrollReveal>
-                        <div className="hud-panel p-8 md:p-10 relative overflow-hidden group">
+                        <div className={cn(
+                            "hud-panel p-8 md:p-10 relative overflow-hidden group border-none",
+                            "bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950", // Sleek dark tech gradient
+                            "dark:bg-transparent dark:bg-none"
+                        )}>
                             {/* Decorative background element */}
                             <div className="absolute top-0 right-0 p-32 bg-neon-cyan/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
                             <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                                 <SlideIn direction="left" className="text-center md:text-left flex-1" delay={0.2}>
-                                    <h2 className="font-display text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center md:justify-start gap-2">
+                                    <h2 className="font-display text-2xl font-bold text-white dark:text-white mb-4 flex items-center justify-center md:justify-start gap-2">
                                         <span className="w-8 h-[2px] bg-neon-cyan inline-block rounded-full" />
                                         About Me
                                     </h2>
-                                    <div className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed text-pretty">
+                                    <div className="text-lg text-gray-200 dark:text-gray-400 leading-relaxed text-pretty">
                                         {reducedMotion ? (
                                             <p>{resumeData.summary.replace(/\n/g, " ")}</p>
                                         ) : (
