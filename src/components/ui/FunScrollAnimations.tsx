@@ -2,6 +2,7 @@ import { useRef, ReactNode } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { cn } from '../../lib/cn';
 
 interface AnimationProps {
     children: ReactNode;
@@ -65,7 +66,7 @@ export function Hover3D({ children, className }: AnimationProps) {
 
     return (
         <motion.div
-            className={className}
+            className={cn("will-change-transform", className)}
             whileHover={{
                 scale: 1.05,
                 rotateX: 5,

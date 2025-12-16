@@ -65,7 +65,7 @@ export function GameTechBackground() {
 
             {/* Cyber Grid - Top Plane (Ceiling) */}
             <motion.div
-                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07]"
+                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] will-change-transform"
                 style={{
                     backgroundImage: `linear-gradient(rgba(14, 165, 233, 0.5) 1px, transparent 1px),
                                     linear-gradient(90deg, rgba(14, 165, 233, 0.5) 1px, transparent 1px)`,
@@ -79,7 +79,7 @@ export function GameTechBackground() {
 
             {/* Cyber Grid - Bottom Plane (Floor) */}
             <motion.div
-                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07]"
+                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] will-change-transform"
                 style={{
                     backgroundImage: `linear-gradient(rgba(191, 0, 255, 0.5) 1px, transparent 1px),
                                     linear-gradient(90deg, rgba(191, 0, 255, 0.5) 1px, transparent 1px)`,
@@ -99,7 +99,7 @@ export function GameTechBackground() {
 
             {/* 1. Icosahedron-ish Wireframe */}
             <motion.div
-                className="absolute top-[15%] right-[10%] w-48 h-48 opacity-20 dark:opacity-30"
+                className="absolute top-[15%] right-[10%] w-48 h-48 opacity-20 dark:opacity-30 will-change-transform"
                 style={{ y: y1, rotate: rotate1 }}
                 animate={{
                     rotate: [0, 360],
@@ -120,7 +120,7 @@ export function GameTechBackground() {
 
             {/* 2. Cube Wireframe */}
             <motion.div
-                className="absolute bottom-[20%] left-[5%] w-32 h-32 opacity-20 dark:opacity-30"
+                className="absolute bottom-[20%] left-[5%] w-32 h-32 opacity-20 dark:opacity-30 will-change-transform"
                 style={{ y: y2 }}
                 animate={{
                     rotateY: [0, 360],
