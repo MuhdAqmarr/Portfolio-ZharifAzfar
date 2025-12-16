@@ -20,11 +20,10 @@ export function PopIn({ children, className, delay = 0 }: AnimationProps) {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{
-                type: isMobile ? "tween" : "spring",
+                type: "spring",
                 stiffness: 300,
                 damping: 15,
-                delay: delay,
-                duration: isMobile ? 0.3 : undefined
+                delay: delay
             }}
         >
             {children}
@@ -50,11 +49,10 @@ export function SlideIn({ children, className, delay = 0, direction = "left" }: 
             whileInView={{ x: 0, y: 0, opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{
-                type: isMobile ? "tween" : "spring",
+                type: "spring",
                 stiffness: 200,
                 damping: 20,
-                delay: delay,
-                duration: isMobile ? 0.4 : undefined
+                delay: delay
             }}
         >
             {children}
@@ -68,23 +66,18 @@ export function Hover3D({ children, className }: AnimationProps) {
     return (
         <motion.div
             className={className}
-            whileHover={
-                isMobile
-                    ? { scale: 1.02 } // Simplified for mobile
-                    : {
-                        scale: 1.05,
-                        rotateX: 5,
-                        rotateY: 5,
-                        zIndex: 10
-                    }
-            }
-            transition={{
-                type: isMobile ? "tween" : "spring",
-                stiffness: 400,
-                damping: 10,
-                duration: isMobile ? 0.2 : undefined
+            whileHover={{
+                scale: 1.05,
+                rotateX: 5,
+                rotateY: 5,
+                zIndex: 10
             }}
-            style={isMobile ? {} : { perspective: 1000 }}
+            transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10
+            }}
+            style={{ perspective: 1000 }}
         >
             {children}
         </motion.div>

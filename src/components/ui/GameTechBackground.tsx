@@ -48,35 +48,7 @@ export function GameTechBackground() {
     // Early return for reduced motion
     if (reducedMotion) return <div className="fixed inset-0 bg-gray-50 dark:bg-gray-950 -z-50" />;
 
-    // Mobile optimization - use simplified static background
-    if (isMobile) {
-        return (
-            <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 select-none">
-                {/* Simple gradient background for mobile */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-cyan-50/10 to-purple-50/10 dark:from-gray-950 dark:to-gray-950 transition-colors duration-500" />
 
-                {/* Subtle static orbs (using radial gradient for smooth glow without heavy blur) */}
-                <div
-                    className="absolute top-[-10%] left-[-10%] w-[50%] h-[30%] rounded-full opacity-40 dark:opacity-30"
-                    style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)' }}
-                />
-                <div
-                    className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[30%] rounded-full opacity-40 dark:opacity-30"
-                    style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.4) 0%, transparent 70%)' }}
-                />
-
-                {/* Simple static grid overlay */}
-                <div
-                    className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]"
-                    style={{
-                        backgroundImage: `linear-gradient(rgba(14, 165, 233, 0.3) 1px, transparent 1px),
-                                        linear-gradient(90deg, rgba(14, 165, 233, 0.3) 1px, transparent 1px)`,
-                        backgroundSize: '60px 60px',
-                    }}
-                />
-            </div>
-        );
-    }
 
     return (
         <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 select-none">
