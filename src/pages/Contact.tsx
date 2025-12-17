@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { PageShell } from '../components/layout/PageShell'
 import { Card, CardContent } from '../components/ui/Card'
@@ -9,6 +10,76 @@ import { useReducedMotion } from '../hooks/useReducedMotion'
 
 export function Contact() {
     const reducedMotion = useReducedMotion()
+
+    // Form state
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    })
+
+    const [errors, setErrors] = useState<Record<string, string>>({})
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+    const validate = () => {
+        const newErrors: Record<string, string> = {}
+
+        if (!formData.name.trim()) newErrors.name = 'Name is required'
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required'
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address'
+        }
+
+        if (!formData.subject.trim()) {
+            newErrors.subject = 'Subject is required'
+        } else if (formData.subject.length < 5) {
+            newErrors.subject = 'Subject must be at least 5 characters'
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = 'Message is required'
+        } else if (formData.message.length < 10) {
+            newErrors.message = 'Message must be at least 10 characters'
+        }
+
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+
+        if (!validate()) return
+
+        setIsSubmitting(true)
+
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500))
+
+        setSubmitStatus('success')
+        setIsSubmitting(false)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+
+        // Reset success message after 3 seconds
+        setTimeout(() => setSubmitStatus('idle'), 3000)
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
+        setFormData(prev => ({ ...prev, [name]: value }))
+        // Clear error when user types
+        if (errors[name]) {
+            setErrors(prev => {
+                const newErrors = { ...prev }
+                delete newErrors[name]
+                return newErrors
+            })
+        }
+    }
 
     const contactInfo = [
         {
@@ -110,53 +181,65 @@ export function Contact() {
                                     </p>
                                 </div>
 
-                                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                                <form className="space-y-6" onSubmit={handleSubmit}>
                                     <div className="grid gap-6 sm:grid-cols-2">
                                         <div>
                                             <label
                                                 htmlFor="name"
                                                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                                             >
-                                                Name
+                                                Name <span className="text-red-500">*</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 id="name"
                                                 name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
                                                 className={cn(
                                                     'w-full px-4 py-3 rounded-lg',
                                                     'bg-white dark:bg-gray-900',
-                                                    'border border-gray-300 dark:border-gray-700',
+                                                    'border',
+                                                    errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700 focus:ring-primary-500',
                                                     'text-gray-900 dark:text-white',
                                                     'placeholder-gray-400 dark:placeholder-gray-500',
-                                                    'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
+                                                    'focus:outline-none focus:ring-2 focus:border-transparent',
                                                     'transition-colors'
                                                 )}
                                                 placeholder="Your name"
                                             />
+                                            {errors.name && (
+                                                <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <label
                                                 htmlFor="email"
                                                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                                             >
-                                                Email
+                                                Email <span className="text-red-500">*</span>
                                             </label>
                                             <input
                                                 type="email"
                                                 id="email"
                                                 name="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
                                                 className={cn(
                                                     'w-full px-4 py-3 rounded-lg',
                                                     'bg-white dark:bg-gray-900',
-                                                    'border border-gray-300 dark:border-gray-700',
+                                                    'border',
+                                                    errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700 focus:ring-primary-500',
                                                     'text-gray-900 dark:text-white',
                                                     'placeholder-gray-400 dark:placeholder-gray-500',
-                                                    'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
+                                                    'focus:outline-none focus:ring-2 focus:border-transparent',
                                                     'transition-colors'
                                                 )}
                                                 placeholder="your@email.com"
                                             />
+                                            {errors.email && (
+                                                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                                            )}
                                         </div>
                                     </div>
 
@@ -165,23 +248,29 @@ export function Contact() {
                                             htmlFor="subject"
                                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                                         >
-                                            Subject
+                                            Subject <span className="text-red-500">*</span>
                                         </label>
                                         <input
                                             type="text"
                                             id="subject"
                                             name="subject"
+                                            value={formData.subject}
+                                            onChange={handleChange}
                                             className={cn(
                                                 'w-full px-4 py-3 rounded-lg',
                                                 'bg-white dark:bg-gray-900',
-                                                'border border-gray-300 dark:border-gray-700',
+                                                'border',
+                                                errors.subject ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700 focus:ring-primary-500',
                                                 'text-gray-900 dark:text-white',
                                                 'placeholder-gray-400 dark:placeholder-gray-500',
-                                                'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
+                                                'focus:outline-none focus:ring-2 focus:border-transparent',
                                                 'transition-colors'
                                             )}
                                             placeholder="What's this about?"
                                         />
+                                        {errors.subject && (
+                                            <p className="mt-1 text-sm text-red-500">{errors.subject}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -189,32 +278,55 @@ export function Contact() {
                                             htmlFor="message"
                                             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                                         >
-                                            Message
+                                            Message <span className="text-red-500">*</span>
                                         </label>
                                         <textarea
                                             id="message"
                                             name="message"
                                             rows={5}
+                                            value={formData.message}
+                                            onChange={handleChange}
                                             className={cn(
                                                 'w-full px-4 py-3 rounded-lg resize-none',
                                                 'bg-white dark:bg-gray-900',
-                                                'border border-gray-300 dark:border-gray-700',
+                                                'border',
+                                                errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700 focus:ring-primary-500',
                                                 'text-gray-900 dark:text-white',
                                                 'placeholder-gray-400 dark:placeholder-gray-500',
-                                                'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
+                                                'focus:outline-none focus:ring-2 focus:border-transparent',
                                                 'transition-colors'
                                             )}
                                             placeholder="Your message..."
                                         />
+                                        {errors.message && (
+                                            <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                                        )}
                                     </div>
 
                                     <div className="text-center">
-                                        <Button type="submit" size="lg">
-                                            Send Message
-                                            <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                            </svg>
+                                        <Button
+                                            type="submit"
+                                            size="lg"
+                                            disabled={isSubmitting}
+                                            className={cn(isSubmitting && 'opacity-70 cursor-not-allowed')}
+                                        >
+                                            {isSubmitting ? 'Sending...' : 'Send Message'}
+                                            {!isSubmitting && (
+                                                <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                                </svg>
+                                            )}
                                         </Button>
+
+                                        {submitStatus === 'success' && (
+                                            <motion.p
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="mt-4 text-green-500 font-medium"
+                                            >
+                                                Message sent successfully! I'll get back to you soon.
+                                            </motion.p>
+                                        )}
                                     </div>
                                 </form>
                             </div>
