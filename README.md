@@ -141,4 +141,4 @@ This project is for personal portfolio use.
 
 ---
 
-Built with ❤️ by Muhammad Zharif Azfar
+Built with ❤️ for Muhammad Zharif Azfar
